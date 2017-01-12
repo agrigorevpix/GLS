@@ -529,7 +529,7 @@ public class Human : Creature
 
         }
 
-            //Хуй поймёшь зачем эта строка но пусть будет
+            //Если всё херня, то сбрасываем работу
         else
         {
             IsBusy = false;
@@ -637,7 +637,7 @@ public class Human : Creature
 
         }
 
-            //Хуй поймёшь зачем эта строка но пусть будет
+            //Если всё херня, то сбрасываем работу
         else
         {
             IsBusy = false;
@@ -810,7 +810,7 @@ public class Human : Creature
         int WhatCook = 0; // какую еду готовим 0 - никакую, 1 - мясо, 2 - фрукты
         //Проверяем есть ли еда, которую можно приготовить в инвентаре
 
-        //Если в инветаре нет мест и нет предметов для готовки, нахуй складируем всё в ящик
+        //Если в инветаре нет мест и нет предметов для готовки, нахер складируем всё в ящик
         if (CheckMassEmptySlot(Inventory) <= 0 && FindSuppliesIInv("Meat") == false && FindSuppliesIInv("Herbal") == false)
         {            
                 PutInChase();            
@@ -840,7 +840,7 @@ public class Human : Creature
 
             bool IsHaveWood = false; // Есть ли дрова?
 
-            //Проведварительно проверяем есть ли у нас дрова, если нет ищем дрова на складе, если нет дров, ебланим
+            //Проведварительно проверяем есть ли у нас дрова, если нет ищем дрова на складе, если нет дров, тупим
             if (WhatCook >= 1)
             {
                 if (FindSuppliesIInv("Wood") != false)
@@ -873,7 +873,7 @@ public class Human : Creature
                     StartCoroutine(Campfire.GetComponent<Bonfire>().KindleFire());
                     // тут надо отнять дрова                
 
-                    //После чего запускаем функцию Cook(), не забываем, что это корунтин!!!
+                    //После чего запускаем функцию Cook(), не забываем, что это корутин!!!
                     if (WhatCook == 1)
                         StartCoroutine(Cooking(true));
 
@@ -1521,7 +1521,7 @@ public class Human : Creature
 
             if (Collected != null)
             {
-                //ГАВНОБЛЯДСТВО!!! ВОЗМОЖНО ЭТО НАДО БУДЕТ ПЕРЕДЕЛАТЬ!!! НО ПОКА ЭТО РАБОТАЕТ ПУСЧАЙ ОСТАНЕТСЯ... :,(
+                //ГАВНОКОД!!! ВОЗМОЖНО ЭТО НАДО БУДЕТ ПЕРЕДЕЛАТЬ!!! НО ПОКА ЭТО РАБОТАЕТ ПУСЧАЙ ОСТАНЕТСЯ... :,(
                 for (int Бизнес = 1; Бизнес <= 2; Бизнес++)                
                 for (int i = 0; i <= Inventory.Length - 1; i++)  //Цикл, ищем в массиве свободные места
                 {
@@ -1617,7 +1617,7 @@ public class Human : Creature
 
         else
         {
-            Debug.Log(gameObject.name + " - Говорит: Всё пиздец, я заблудился(ась) и хуй знает где объект");
+            Debug.Log(gameObject.name + " - Говорит: Всё писец, я заблудился(ась) и хрен знает где объект");
             return null;
         }
     }
@@ -1655,7 +1655,7 @@ public class Human : Creature
 
         else
         {
-            Debug.Log("Уёбываемся у костра");
+            Debug.Log("Ложимся у костра");
 
             SleepPlace = FindNearObj("Campfire");
             if (SleepPlace != null)
@@ -1780,230 +1780,3 @@ public class Human : Creature
 
 
 
-/*  на память
- * 
- *  Debug.Log("Дом2 построй свою любовь");
-IsBusy = true;
-
- GameObject[] Struct_Massive = GameObject.FindGameObjectsWithTag("Construction"); //Ищем строязщиеся здания рядом
-
-    int HaveObInMassive = CheckMassSlot(Struct_Massive);
-
-    if (HaveObInMassive >= 1) //Если таковые имеются
-    {
-        GameObject StructObj = FindAndGo("Construction");
-        GameObject gos = FindNearObj("Construction");
-
-        if (Vector3.Distance(gos.transform.position, MyTransform.position) <= 0f && !TakingSupplies) //Если рядом то строим
-        {
-            Debug.Log("Таки зашли мы в пидорское условие  " + Vector3.Distance(gos.transform.position, MyTransform.position));
-            ConstructionBuilding Build = StructObj.GetComponent<ConstructionBuilding>();
-            bool CanBuild = Build.CanBuilding();
-
-            if (CanBuild)  // если всё готово к постройке, то строим
-                StartCoroutine(Build.Building(BuildSkill));
-
-            else // Если нихера не готово, то ищем ресурсы
-            {
-                if (Build.Stone - 1 <= Build.NeedStone) // Ищем камни
-                {
-                    // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    bool HaveAnSupplies = FindSupplies("Stone"); // Можно заменить ниже написанное просто этим!!!
-                    // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                    if (HaveAnSupplies)
-                    {
-                        for (int i = 0; i <= Inventory.Length - 1; i++)  //Цикл, в массиве Inventory ищем что-то
-                        {
-                            if (Inventory[i].tag == "Stone") // Если находим камень, то кладём его на строительство!
-                            {
-                                Build.Stone++;       //Инкрементируем значение камней у строения
-                                Inventory[i] = null; // Стираем его из инвентаря
-                                DisplayInv();      // Обновляем дисплей инвентаря
-                                break;
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        GameObject[] Object_Massive = GameObject.FindGameObjectsWithTag("Chest"); // Ищем сундук
-
-                        int IsHaveChest = CheckMassSlot(Object_Massive);
-
-                        if (IsHaveChest >= 1)
-                        {
-                            GameObject Ch = FindAndGo("Chest");  //Ищем сундучёк
-
-                            if (Ch != null)
-                            {
-                                if (Vector3.Distance(Ch.transform.position, MyTransform.position) <= 2f) // Если рядом то забираем камни из сундука
-                                {
-                                    Chest StoneCh = Ch.GetComponent<Chest>(); // Ссылка на ящике
-
-                                    GameObject go = StoneCh.TakeOut("Stone");
-
-                                    PutInInventory(go);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Build.Wood - 1 <= Build.NeedWood) // Ищем Дерево
-                {
-                    // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    bool HaveAnSupplies = FindSupplies("Wood"); // Можно заменить ниже написанное просто этим!!!
-                    // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                    if (HaveAnSupplies)
-                    {
-                        for (int i = 0; i < Inventory.Length; i++)  //Цикл, в массиве Inventory ищем что-то
-                        {
-                            if (Inventory[i] != null)
-                            {
-                                if (Inventory[i].tag == "Wood") // Если находим камень, то кладём его на строительство!
-                                {
-                                    Build.Wood++;
-                                    Inventory[i] = null;
-                                    DisplayInv();      // Обновляем дисплей инвентаря
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        GameObject[] Object_Massive = GameObject.FindGameObjectsWithTag("Chest"); // Ищем сундук
-
-                        int IsHaveChest = CheckMassSlot(Object_Massive);
-
-                        if (IsHaveChest >= 1)
-                        {
-                            GameObject Ch = FindAndGo("Chest");  //Ищем сундучёк
-
-                            if (Ch != null)
-                            {
-                                if (Vector3.Distance(Ch.transform.position, MyTransform.position) < 2f) // Если рядом то забираем камни из сундука
-                                {
-                                    Chest StoneCh = Ch.GetComponent<Chest>(); // Ссылка на ящике
-
-                                    GameObject go = StoneCh.TakeOut("Wood");
-
-                                    PutInInventory(go);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        else
-        {
-            GameObject StructObject = FindNearObj("Construction"); // Ищем объект здания
-            ConstructionBuilding Build = StructObject.GetComponent<ConstructionBuilding>(); //Ссылка на его параметры, чтобы знать чего ему не хватает
-
-            if (Build.Stone - 1 <= Build.NeedStone) // Ищем камни
-            {
-                // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                bool HaveAnSupplies = FindSupplies("Stone"); // Можно заменить ниже написанное просто этим!!!
-                // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                if (HaveAnSupplies)
-                {
-                    for (int i = 0; i <= Inventory.Length - 1; i++)  //Цикл, в массиве Inventory ищем что-то
-                    {
-                        if (Inventory[i].tag == "Stone") // Если находим камень, то кладём его на строительство!
-                        {
-                            Build.Stone++;       //Инкрементируем значение камней у строения
-                            Inventory[i] = null; // Стираем его из инвентаря
-                            DisplayInv();      // Обновляем дисплей инвентаря
-                            break;
-                        }
-                    }
-                }
-
-                else
-                {
-                    GameObject[] Object_Massive = GameObject.FindGameObjectsWithTag("Chest"); // Ищем сундук
-
-                    int IsHaveChest = CheckMassSlot(Object_Massive);
-
-                    if (IsHaveChest >= 1)
-                    {
-                        GameObject Ch = FindAndGo("Chest");  //Ищем сундучёк
-
-                        if (Ch != null)
-                        {
-                            if (Vector3.Distance(Ch.transform.position, MyTransform.position) <= 2f) // Если рядом то забираем камни из сундука
-                            {
-                                Chest StoneCh = Ch.GetComponent<Chest>(); // Ссылка на ящике
-
-                                GameObject go = StoneCh.TakeOut("Stone");
-
-                                PutInInventory(go);
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (Build.Wood - 1 <= Build.NeedWood) // Ищем Дерево
-            {
-                // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                bool HaveAnSupplies = FindSupplies("Wood"); // Можно заменить ниже написанное просто этим!!!
-                // !!!! ЗАДУМАТЬСЯ НАХУЙ НАД ЭТИМ!!!!!!! ВОЗМОЖНО СОКРАТИТЬ ЛИШНЕЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                if (HaveAnSupplies)
-                {
-                    for (int i = 0; i < Inventory.Length; i++)  //Цикл, в массиве Inventory ищем что-то
-                    {
-                        if (Inventory[i] != null)
-                        {
-                            if (Inventory[i].tag == "Wood") // Если находим камень, то кладём его на строительство!
-                            {
-                                Build.Wood++;
-                                Inventory[i] = null;
-                                DisplayInv();      // Обновляем дисплей инвентаря
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                else
-                {
-                    GameObject[] Object_Massive = GameObject.FindGameObjectsWithTag("Chest"); // Ищем сундук
-
-                    int IsHaveChest = CheckMassSlot(Object_Massive);
-
-                    if (IsHaveChest >= 1)
-                    {
-                        GameObject Ch = FindAndGo("Chest");  //Ищем сундучёк
-
-                        if (Ch != null)
-                        {
-                            if (Vector3.Distance(Ch.transform.position, MyTransform.position) < 2f) // Если рядом то забираем камни из сундука
-                            {
-                                Chest StoneCh = Ch.GetComponent<Chest>(); // Ссылка на ящике
-
-                                GameObject go = StoneCh.TakeOut("Wood");
-
-                                PutInInventory(go);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    else
-    {
-        Debug.Log("Нет зданий для постройки!");
-
-        IsBusy = false;
-    }
- */
