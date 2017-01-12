@@ -667,7 +667,7 @@ public class Creature : MonoBehaviour
         SearchingFood = false;
     }
 
-    //ВНИМАНИЕ!!!!!!!!!! НИЖЕ УСТАРЕВШИЙ МЕТОД !!!!! НАДО ЕГО НАХУЙ ОПТИМИЗИРОВАТЬ, ТАМ ПОЛНЫЙ ПИЗДЕЦ ОБМЕН ПОЦЕЛУЯМИ ЧЕРЕЗ 
+    //ВНИМАНИЕ!!!!!!!!!! НИЖЕ УСТАРЕВШИЙ МЕТОД !!!!! НАДО ЕГО НАХРЕН ОПТИМИЗИРОВАТЬ, ТАМ ПОЛНЫЙ ЗВИЗДЕЦ, АХРИНИТЕЛЬНЫЙ ОБМЕН ПОЦЕЛУЯМИ ЧЕРЕЗ 
     // GetComponent С WaterWell
     /// <summary>
     /// Просто пьём ;) устаревший метод, можно удалять скоро
@@ -690,7 +690,7 @@ public class Creature : MonoBehaviour
         //Thirst += Num;
     }
 
-    //DisplayInv() БЛЯДКАЯ САДОМИЯ ОПТИМИЗИРОВАТЬ НАХУЙ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GetComponent творит беспредельное нечто!
+    //DisplayInv() СРАНАЯ САДОМИЯ ОПТИМИЗИРОВАТЬ НАХРЕН!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! GetComponent творит беспредельное нечто! оптимизировать позже
     /// <summary>
     /// Отображение инвентаря на дисплее
     /// </summary>
@@ -917,7 +917,7 @@ public class Creature : MonoBehaviour
         else if (Thirst >= 90 && IsNearWater)
             Debug.Log(gameObject.name + " - Говорит: Меня уже тощнит от воды!");
 
-        // RemainingDistance = agent.remainingDistance; // Хуй знает что это, но пусть будет на всякий случай
+        // RemainingDistance = agent.remainingDistance; // Хер знает что это, но пусть будет на всякий случай
 
         if (Thirst <= 20 && !isActive && !SearchingFood && !CriticalHunger && !IsAsleep || CriticalThirst && !IsAsleep)
         {
@@ -937,7 +937,7 @@ public class Creature : MonoBehaviour
                     StartCoroutine(FindFood());
                 }
 
-                //а люди умные пиздец, нихуя не хотят искать, только в телеге ищут
+                //а люди умные звиздец, нихрена не хотят искать, только в телеге ищут
                 if (Ai_Human)
                 {
                     if (CheckFoodInChests("CookedMeat") == true)
@@ -974,7 +974,7 @@ public class Creature : MonoBehaviour
             OverLookLight.SetActive(false);
         }
 
-        //Возможно есть способ не обращаться постоянно к выключенному свету это кладёт производительность
+        //Возможно есть способ не обращаться постоянно к выключенному свету это кладёт производительность, покурить на досуге
         if (Respect <= 19)
         {
             OverLookLight.SetActive(false);
@@ -982,10 +982,10 @@ public class Creature : MonoBehaviour
 
         #endregion
 
-        //БЛЯЯЯЯ!!!!!!!!!!!!!!!!!!! Сделай ты ёбаный в рот ссылки на объект, хули ты над процессом издеваешься???!?!?!?!?!??!!?
+        //БЛЯЯЯЯ!!!!!!!!!!!!!!!!!!! Сделай ты блин ссылки на объект, хрен ли ты над процессом издеваешься???!?!?!?!?!??!!?
         #region Display
 
-        //БЛЯЯЯЯ!!!!!!!!!!!!!!!!!!! Сделай ты ёбаный в рот ссылки на объект, хули ты над процессом издеваешься???!?!?!?!?!??!!?
+        //БЛЯЯЯЯ!!!!!!!!!!!!!!!!!!! Сделай ты блин ссылки на объект, хрен ли ты над процессом издеваешься???!?!?!?!?!??!!?
         if (isActive && Respect >= 30)
         {
             RespectDis.GetComponent<Text>().text = ("Уважение: " + Respect);
@@ -1179,7 +1179,7 @@ public class Creature : MonoBehaviour
                 else
                 {
                     IsHavingFood = false;
-                    Debug.Log(gameObject.name + " - Говорит: Всё пиздец, я заблудился(ась) и хуй знает где объект");
+                    Debug.Log(gameObject.name + " - Говорит: Всё писец, я заблудился(ась) и хрен знает где объект");
                     SearchingFood = false;
                     break;
                 }
@@ -1188,7 +1188,7 @@ public class Creature : MonoBehaviour
             else
             {
                 IsHavingFood = false;
-                Debug.Log(gameObject.name + " - Говорит: Всё пиздец, жрать нечего!");
+                Debug.Log(gameObject.name + " - Говорит: Всё писец, жрать нечего!");
             }
         }
 
@@ -1235,7 +1235,7 @@ public class Creature : MonoBehaviour
                         movementTargetPosition = go[i].transform.position;        //Элемент Ближайшая цель                        
                     }
 
-                    if (Vector3.Distance(go[i].transform.position, MyTransform.position) < TakeDis) // Если мы рядом, то мы ж ёбана в рот рядом!
+                    if (Vector3.Distance(go[i].transform.position, MyTransform.position) < TakeDis) // Если мы рядом, то мы ж блин рядом!
                     {
                         if (AreTake)
                         {
@@ -1250,7 +1250,7 @@ public class Creature : MonoBehaviour
 
                 else
                 {
-                    Debug.Log(gameObject.name + " - Говорит: Всё пиздец, я заблудился(ась) и хуй знает где объект");
+                    Debug.Log(gameObject.name + " - Говорит: Всё писец, я заблудился(ась) и хрен знает где объект");
                     IsHavingGO = false;
                     break;
                 }
@@ -1258,7 +1258,7 @@ public class Creature : MonoBehaviour
 
             else
             {
-                //Debug.Log(gameObject.name + " - Говорит: Всё пиздец, объетов в сундуках нет этого сраного " + TextTag);                
+                //Debug.Log(gameObject.name + " - Говорит: Всё писец, объетов в сундуках нет этого сраного " + TextTag);                
                 IsHavingGO = false;
             }
         }
